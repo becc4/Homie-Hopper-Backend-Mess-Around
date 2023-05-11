@@ -73,10 +73,12 @@ from sklearn.decomposition import PCA
 
 # Instantiate a new object of PCA class
 pca = PCA()
+# Perform PCA, fit the PCA model to the input data and transform it to the principal components space (column)
 X = pca.fit_transform(x)
-print(f"Covariance based on the data's features\n{pca.get_covariance()}\n")
+# 
+print(f"Covariance matrix on how much the features vary together\n{pca.get_covariance()}\n")
 explained_variance = pca.explained_variance_ratio_
-print(f"Variance ratios for each column\n{explained_variance}\n")
+print(f"Total variance ratios for each principal component\n{explained_variance}\n")
 
 print("="*20)
 
@@ -88,3 +90,6 @@ with plt.style.context("dark_background"):
     plt.xlabel("Principal components")
     plt.legend(loc="best")
     plt.tight_layout()
+    plt.show()      # Use plt.show() to show the plot you just created
+
+    
