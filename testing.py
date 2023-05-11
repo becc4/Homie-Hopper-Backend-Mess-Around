@@ -43,11 +43,48 @@ from sklearn.datasets import load_iris
 
 iris = load_iris()
 # Display the feature names and Encoding of target vars
-print(iris.feature_names)
-print(iris.target_names)
+print(f"These are the feature names\n{iris.feature_names}\n")
+print(f"These are the target names\n{iris.target_names}\n")
 
 # Format the data from iris dataset to a data frame from pandas
 data = pd.DataFrame(iris.data)
 data.columns = iris.feature_names
 data["CLASS"] = iris.target
-print(data.head())
+print(f"These are the header titles\n{data.head()}\n")
+
+# Display the range index, all data columns, datatypes, and memory used with info() method
+print(data.info())
+# Display a statistical overview of the dataset
+print(data.describe())
+
+# Split the data, specifically the features and targets as 2 separate variables
+x = data.iloc[:,:4]     # Features
+y = data.iloc[:,4]      # Targets
+print(f"This is the shape of x and y. Format = (rows, features)\n{x.shape, y.shape}")
+print("Result is a tuple, or tuple of tuples\n")
+
+'''==========================================================================================================================='''
+
+'''
+Actually using PCA from sklearn
+'''
+
+from sklearn.decomposition import PCA
+
+# Instantiate a new object of PCA class
+pca = PCA()
+X = pca.fit_transform(x)
+print(f"Covariance based on the data's features\n{pca.get_covariance()}\n")
+explained_variance = pca.explained_variance_ratio_
+print(f"Variance ratios for each column\n{explained_variance}\n")
+
+print("="*20)
+
+# Visualize the covariance to help select the amount of principal components
+with plt.style.context("dark_background"):
+    plt.figure(figsize=(6,4))
+    plt.bar(range(4), explained_variance, alpha=0.5, align="center", label="individual explained variance")
+    plt.ylabel("Explained variance ratio")
+    plt.xlabel("Principal components")
+    plt.legend(loc="best")
+    plt.tight_layout()
