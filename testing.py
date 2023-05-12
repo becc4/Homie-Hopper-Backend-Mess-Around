@@ -72,7 +72,8 @@ Actually using PCA from sklearn
 from sklearn.decomposition import PCA
 
 # Instantiate a new object of PCA class
-pca = PCA()
+pca = PCA(n_components=4)       # The shapes arguments need to match when the error is thrown
+# Changes the n_components=3 to see the error Im talking about
 # Perform PCA, fit the PCA model to the input data and transform it to the principal components space (column)
 X = pca.fit_transform(x)
 # 
@@ -80,7 +81,7 @@ print(f"Covariance matrix on how much the features vary together\n{pca.get_covar
 explained_variance = pca.explained_variance_ratio_
 print(f"Total variance ratios for each principal component\n{explained_variance}\n")
 
-print("="*20)
+print("="*50)
 
 # Visualize the covariance to help select the amount of principal components
 with plt.style.context("dark_background"):
@@ -90,6 +91,43 @@ with plt.style.context("dark_background"):
     plt.xlabel("Principal components")
     plt.legend(loc="best")
     plt.tight_layout()
-    plt.show()      # Use plt.show() to show the plot you just created
+    # plt.show()      # Use plt.show() to show the plot you just created
 
-    
+print()
+
+# Seeing the plot, we can confidently conclude that there are 4 components with  variance
+# We therefore go back to where we created `pca` variable, line 75, set the n_components= argument to however many components have significant variance
+
+'''==========================================================================================================================='''
+
+'''
+Splitting the data into training and test sets
+'''
+# Why do this?
+# To prevent predictions on only trained data leading to overfitting, thus giving bad results for unknown data
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=20, stratify=y)
+
+'''==========================================================================================================================='''
+
+'''
+Training the Model and predicting
+'''
+
+from sklearn.neighbors import KNeighborsClassifier
+
+# Save the KNN classifier to a variable
+model = KNeighborsClassifier(7)
+# Fit the training data to the model
+model.fit(X_train, y_train)
+# Predict the class labels of the test dataset
+y_pred = model.predict(X_test)
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+
+cm = confusion_matrix(y_test, y_pred)
+# Confusion matrix will who the count all false positives and negatives, and true positives and negatives
+print(f"The confusion matrix\n{cm}\n")
+# Accuracy score is formatted as a percentage (0.5 = 50%) as how effective the prediction is for predicting new data
+print(f"The accurcay score\n{accuracy_score(y_test, y_pred)}")
