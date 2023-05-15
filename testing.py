@@ -2,39 +2,41 @@
 Organizing user data from users.json
 '''
 
-# # Import required libraries
-# import json
+# Import required libraries
+import json
 
-# # Global variables
-# email_list = []
-# username_list = []
-# snapchat_list = []
-# interests_list = []
-# userid_list = []
+# Global variables
+email_list = []
+username_list = []
+snapchat_list = []
+interests_list = []
+userid_list = []
 
-# with open(r"users.json") as file:
-#     data_dict = {}
-#     interests_dict = {}
+with open(r"users.json") as file:
+    data_dict = {}
+    interests_dict = {}
 
-#     data_dict = json.load(file)
-#     # print(data_dict)
-#     for i in data_dict:
-#         email_list.append(i["userEmail"])
-#         username_list.append(i["userName"])
-#         snapchat_list.append(i["snapInfo"])
-#         interests_list.append(i["userInterests"])
-#         userid_list.append(i["userID"])
+    data_dict = json.load(file)
+    # print(data_dict)
+    for i in data_dict:
+        email_list.append(i["userEmail"])
+        username_list.append(i["userName"])
+        snapchat_list.append(i["snapInfo"])
+        interests_list.append(i["userInterests"])
+        userid_list.append(i["userID"])
 
-#     # print(interests_list)
+for i in interests_list:
+    print(i)
+
     
-#     interests_dict = json.loads(interests_list)
-#     # print(interests_dict)
+    # interests_dict = json.loads(interests_list)
+    # print(interests_dict)
 
 '''==========================================================================================================================='''
 
 '''
-Messing around with PCA (partial component analysis)
-'''
+# Messing around with PCA (partial component analysis)
+# '''
 
 import numpy as np
 import pandas as pd
