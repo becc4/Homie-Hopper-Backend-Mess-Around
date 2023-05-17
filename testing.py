@@ -74,10 +74,16 @@ def scatter_data():
     data_df.set_index("userID", inplace=True)
     data_df = data_df["userInterests"].apply(pd.Series).T
 
-    # Create scatter plot with first 3 users
-    plt.scatter(data_df.index, data_df["0zJNMsXJusc0eSjAsLpJiK2qKFA3"], color="blue", label="Peyton Haws")
-    plt.scatter(data_df.index, data_df["23YTrKsZbfahA72gd0zlXXgTzRb2"], color="red", label="Jared Keh")
-    plt.scatter(data_df.index, data_df["2ctKnR3VjpfBNesW8MkuRqpYjJh1"], color="green", label="Sergio Alba")
+    # # Create scatter plot with first 3 users
+    # plt.scatter(data_df.index, data_df["0zJNMsXJusc0eSjAsLpJiK2qKFA3"], color="blue", label="Peyton Haws")
+    # plt.scatter(data_df.index, data_df["23YTrKsZbfahA72gd0zlXXgTzRb2"], color="red", label="Jared Keh")
+    # plt.scatter(data_df.index, data_df["2ctKnR3VjpfBNesW8MkuRqpYjJh1"], color="green", label="Sergio Alba")
+
+    # Convert userID column to a list
+    user_ids = data_df.columns.to_list()
+
+    # set colors
+    colors = "blue"
 
     # Set axis labels and legend
     plt.xlabel("Question Number")
