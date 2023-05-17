@@ -33,13 +33,13 @@ def populate_lists():
 '''==========================================================================================================================='''
 
 '''
-Visualizing data with pandas and matplotlib
+Visualizing bar data with pandas and matplotlib
 '''
 
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def visualize_data():
+def bar_data():
     # Open and parse the json file
     with open(r"userInsterest.json") as file:
         data_df = pd.read_json(file)
@@ -62,6 +62,33 @@ def visualize_data():
 '''==========================================================================================================================='''
 
 '''
+Visualizing user interest data as a scatter plot
+'''
+
+def scatter_data():
+    # Read and save userInsterest.json to a pandas Data Frame
+    data = pd.read_json(r"C:\Users\lengu\Desktop\School\CSE 310 Applied programming\2023\HH_survey\Homie-Hopper-Backend-Mess-Around\userInsterest.json")
+    data_df = pd.DataFrame(data)
+    
+    # Set userID values as indices
+    data_df.set_index("userID", inplace=True)
+    data_df = data_df["userInterests"].apply(pd.Series).T
+
+    # Create scatter plot with first 3 users
+    plt.scatter(data_df.index, data_df["0zJNMsXJusc0eSjAsLpJiK2qKFA3"], color="blue", label="Peyton Haws")
+    plt.scatter(data_df.index, data_df["23YTrKsZbfahA72gd0zlXXgTzRb2"], color="red", label="Jared Keh")
+    plt.scatter(data_df.index, data_df["2ctKnR3VjpfBNesW8MkuRqpYjJh1"], color="green", label="Sergio Alba")
+
+    # Set axis labels and legend
+    plt.xlabel("Question Number")
+    plt.ylabel("Interest Level")
+    plt.legend()
+    # Display the scatter plot
+    plt.show()
+
+'''==========================================================================================================================='''
+
+'''
 Recommendation engine using Euclidean distance method
 '''
 
@@ -78,7 +105,7 @@ def reccomend():
 
 if __name__ == "__main__":
     # populate_lists()
-    # visualize_data()
-    
+    # bar_data()
+    scatter_data()
 
     pass
