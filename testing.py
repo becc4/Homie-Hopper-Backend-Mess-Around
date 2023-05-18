@@ -14,7 +14,7 @@ def populate_lists():
 
     with open(r"users.json") as file:
         data_dict = {}
-        interests_dict = {}
+        interests_dict = []
 
         data_dict = json.load(file)
         # print(data_dict)
@@ -25,10 +25,11 @@ def populate_lists():
             interests_list.append(i["userInterests"])
             userid_list.append(i["userID"])
 
-    for i in interests_list:
-        print(i)
-        # interests_dict = json.loads(interests_list)
-        # print(interests_dict)
+    return interests_list
+
+    # for i in interests_list:
+    #     # print(i)
+    #     print(i.values())
 
 '''==========================================================================================================================='''
 
@@ -64,39 +65,144 @@ def bar_data():
 '''
 Visualizing user interest data as a scatter plot
 '''
+# Also imported pandas as pd and matplotlib as plt libraries
+import numpy as np
 
 def scatter_data():
-    # Read and save userInsterest.json to a pandas Data Frame
+    # # Read and save userInsterest.json to a pandas Data Frame
+    # data = pd.read_json(r"C:\Users\lengu\Desktop\School\CSE 310 Applied programming\2023\HH_survey\Homie-Hopper-Backend-Mess-Around\userInsterest.json")
+    # data_df = pd.DataFrame(data)
+    
+    # # Set userID values as indices
+    # data_df.set_index("userID", inplace=True)
+    # data_df = data_df["userInterests"].apply(pd.Series).T
+
+    # # # Create scatter plot with first 3 users
+    # # plt.scatter(data_df.index, data_df["0zJNMsXJusc0eSjAsLpJiK2qKFA3"], color="blue", label="Peyton Haws")
+    # # plt.scatter(data_df.index, data_df["23YTrKsZbfahA72gd0zlXXgTzRb2"], color="red", label="Jared Keh")
+    # # plt.scatter(data_df.index, data_df["2ctKnR3VjpfBNesW8MkuRqpYjJh1"], color="green", label="Sergio Alba")
+
+    # # Convert userID column to a list
+    # user_ids = data_df.columns.to_list()
+    # # Set colors
+    # # colors = np.random.uniform(15, 80)
+    # # colors = ["red", "blue", "green"]
+    # colors = ["blue", "red", "green", "orange", "purple", "brown", "pink", "gray", "olive", "cyan"] * 4
+    # # Create scatter plots
+    # for i,user_id in enumerate(user_ids):
+    #     plt.scatter(data_df.index, data_df[user_id], color=colors[i], label=user_id)
+
+    # # Set axis labels and legend
+    # plt.xlabel("Question Number")
+    # plt.ylabel("Interest Level")
+    # plt.legend()
+    # # Display the scatter plot
+    # plt.show()
+
+    # Read and save userInsterest.json to a pandas DataFrame
     data = pd.read_json(r"C:\Users\lengu\Desktop\School\CSE 310 Applied programming\2023\HH_survey\Homie-Hopper-Backend-Mess-Around\userInsterest.json")
     data_df = pd.DataFrame(data)
-    
+
     # Set userID values as indices
     data_df.set_index("userID", inplace=True)
     data_df = data_df["userInterests"].apply(pd.Series).T
 
-    # # Create scatter plot with first 3 users
-    # plt.scatter(data_df.index, data_df["0zJNMsXJusc0eSjAsLpJiK2qKFA3"], color="blue", label="Peyton Haws")
-    # plt.scatter(data_df.index, data_df["23YTrKsZbfahA72gd0zlXXgTzRb2"], color="red", label="Jared Keh")
-    # plt.scatter(data_df.index, data_df["2ctKnR3VjpfBNesW8MkuRqpYjJh1"], color="green", label="Sergio Alba")
+    # Get user IDs and covert to a list
+    user_ids = data_df.columns.tolist()
 
-    # Convert userID column to a list
-    user_ids = data_df.columns.to_list()
+    fig, ax = plt.subplot()
+    scatter_plots = []
+    # Loop through each user profile
+    for user_id in user_ids:
+        # Generate x and y coordinates based on user profiles
+        x = data_df.index.astype(int)
+        y = data_df[user_id]
+        # Set sizes and colors based on user profiles
+        sizes = data_df[user_id]
+        colors = data_df[user_id]
+        scatter = ax.scatter(x, y, s=sizes, c=colors, cmap="viridis", vmin=0, vmax=100)
+        scatter_plots.append(scatter[0])
 
-    # set colors
-    colors = "blue"
-
-    # Set axis labels and legend
-    plt.xlabel("Question Number")
-    plt.ylabel("Interest Level")
-    plt.legend()
-    # Display the scatter plot
+    # Define and display the plot
+    ax.set(xlim=(0,data_df.index.max()), ylim=(-1,5))       # Adjusts the y axis as needed
+    ax.set_xlabel("Question Number")
+    ax.set_ylabel("Interest Level")
+    ax.set_title("User Profiles Interests")
+    fig.colorbar(scatter_plots[0], label="color")
+    ax.legend(loc="uppper right", bbox_to_anchor=(1.3,1.0))
     plt.show()
+
 
 '''==========================================================================================================================='''
 
 '''
+matplotlib scatter plot practice
+'''
+
+# Imported matplotlib.pyplot as plt and numpy as np 
+def scatter_practice():
+    # plt.style.use("_mpl-gallery")
+
+    # Generate random data
+    x = 4+np.random.normal(0,2,24)
+    y = 4+np.random.normal(0,2,len(x))
+
+    # Save sorta random sizes and colors
+    sizes = np.random.uniform(15,80,len(x))
+    colors = np.random.uniform(15,80,len(x))
+
+    # Define and display the plot (WARNING: will be smol)
+    fig, ax = plt.subplots()
+    scatter = ax.scatter(x, y, s=sizes, c=colors, cmap="viridis", vmin=0, vmax=100)
+    ax.set(xlim=(0,8), xticks=np.arange(1,8), ylim=(0,8), yticks=np.arange(1,8))
+    ax.set_xlabel("X")
+    ax.set_ylabel("Y")
+    fig.colorbar(scatter, label="Color")
+    plt.show()
+
+
+# Imported json, numpy as mp, and matplotlib.pyplot as plt
+
+def scatter_data_simple():
+    # open file to save data to lists
+    with open(r"userInsterest.json") as file:
+        data_list = []
+        UI_list = []
+        id_list = []
+        data_list = json.load(file)
+
+        # Convert all userInterests values to list data types
+        for i in data_list:
+            UI_list.append(list(i["userInterests"].values()))     # UI_list to be y axis
+            # id_list.append(i["userID"])
+        
+        # Temporary list to represent total amount of users
+        total_users = []
+        for i in range(len(data_list)):
+            total_users.append(i)        # total_users list to be x axis
+
+        # Set custom axes ticks and limits
+        plt.xticks(np.arange(0, len(total_users), 1))
+        plt.yticks(np.arange(0, len(UI_list), 1))
+        # Define and show plot
+        for user, interests in zip(total_users, UI_list):
+            plt.scatter([user] * len(interests), interests)
+        # plt.scatter(total_users, UI_list)
+        
+        # # Define labels
+        plt.xlabel("User")
+        plt.ylabel("Interest Level")
+        plt.title("User Interests")
+        plt.show()
+
+'''==========================================================================================================================='''
+
+
+'''
 Recommendation engine using Euclidean distance method
 '''
+
+# Imported pandas as pd 
 
 def reccomend():
     data = pd.read_json(r"C:\Users\lengu\Desktop\School\CSE 310 Applied programming\2023\HH_survey\Homie-Hopper-Backend-Mess-Around\userInsterest.json")
@@ -112,6 +218,7 @@ def reccomend():
 if __name__ == "__main__":
     # populate_lists()
     # bar_data()
-    scatter_data()
-
+    # scatter_data()
+    # scatter_practice()
+    scatter_data_simple()
     pass
