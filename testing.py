@@ -215,10 +215,55 @@ def reccomend():
 
 '''==========================================================================================================================='''
 
+'''
+Sorting and weighing algorithm for users
+'''
+def bubble_sort(array):
+    switched = False
+    for i in range(len(array)):
+        for j in range(len(array)-i-1):
+            if array[j] > array[j+1]:
+                temp = array[j]
+                array[j] = array[j+1]
+                array[j+1] = temp
+                switched = True
+
+            if not switched:
+                break
+    print(array)
+
+def weigh_interests(dictionary):
+    for i in dictionary.values():
+        pass
+
+
+### Use embedded dictionaries with separate key "labels" to assign a rank/weight to each question
+{
+    "userInterests": {
+        "q7": {"Level": 1, "Rank": 10},
+        "q1": {"Level": 0, "Rank": 9},
+        "q6": {"Level": 1, "Rank": 8}
+    }
+}
+
+
+# # global var
+# STANDBY_LINE = []
+# def standby():
+#     global STANDBY_LINE
+#     STANDBY_LINE.append()
+
+# def add_to_group():
+#     pass
+
 if __name__ == "__main__":
+    my_array = [12,5,99,-9,3.14]
+
     # populate_lists()
     # bar_data()
     # scatter_data()
     # scatter_practice()
-    scatter_data_simple()
+    # scatter_data_simple()
+    bubble_sort(my_array)
+
     pass
