@@ -237,7 +237,7 @@ def weigh_interests(dictionary):
         pass
 
 
-### Use embedded dictionaries with separate key "labels" to assign a rank/weight to each question
+### TODO Use embedded dictionaries with separate key "labels" to assign a rank/weight to each question and edit original data with rank value
 {
     "userInterests": {
         "q7": {"Level": 1, "Rank": 10},
