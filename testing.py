@@ -25,7 +25,7 @@ def populate_lists():
             interests_list.append(i["userInterests"])
             userid_list.append(i["userID"])
 
-    return interests_list
+    print(interests_list)
 
     # for i in interests_list:
     #     # print(i)
@@ -246,15 +246,31 @@ def weigh_interests(dictionary):
     }
 }
 
+'''==========================================================================================================================='''
 
-# # global var
-# STANDBY_LINE = []
-# def standby():
-#     global STANDBY_LINE
-#     STANDBY_LINE.append()
+'''
+Euclidean distance with Pythagorean theorem
+'''
 
-# def add_to_group():
-#     pass
+
+def find_similarities():
+    # Import math and json libraries
+    from math import sqrt
+
+    # Global vars
+    data_obj = open(r"userInsterest.json")
+    user_data = json.load(data_obj)
+    # ID_interests = {
+    #     "userID": None,
+    #     # "userInterests": None
+    # }
+
+    for i in user_data:
+    #     ID_interests[i]["userID"] = user_data[i]["userID"]
+
+        print(i)
+
+'''==========================================================================================================================='''
 
 if __name__ == "__main__":
     my_array = [12,5,99,-9,3.14]
@@ -264,6 +280,7 @@ if __name__ == "__main__":
     # scatter_data()
     # scatter_practice()
     # scatter_data_simple()
-    bubble_sort(my_array)
+    # bubble_sort(my_array)
+    find_similarities()
 
     pass
