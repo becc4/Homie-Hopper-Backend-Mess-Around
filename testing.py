@@ -232,11 +232,6 @@ def bubble_sort(array):
                 break
     print(array)
 
-def weigh_interests(dictionary):
-    for i in dictionary.values():
-        pass
-
-
 ### TODO Use embedded dictionaries with separate key "labels" to assign a rank/weight to each question and edit original data with rank value
 {
     "userInterests": {
@@ -249,31 +244,36 @@ def weigh_interests(dictionary):
 '''==========================================================================================================================='''
 
 '''
-Euclidean distance with Pythagorean theorem
+Finding similarities with Euclidean distance 
 '''
 
+# # ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Euclidean distance is simply know as the 2d length between 2 points in space.
+# Same as Pythagorean theorem except its expanded (or deconstructed depending on your beliefs)
+#   Pythagorean: a^2 + b^2 = c^2
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   Euclidean: sqrt((b1 - a1)^2 + (b2 - a2)^2 +...) = c
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+# Import math, json libraries and dataset list obj from users copy.json
+from users_copy import dataset
+import math
+
+def euclid_dist(x, y):
+    # Fancy list comprehension using the zip() object
+    distance = math.sqrt(sum(pow(a - b, 2) for a, b in zip(x, y)))
+    print(distance)
 
 def find_similarities():
-    # Import math and json libraries
-    from math import sqrt
-
-    # Global vars
-    data_obj = open(r"userInsterest.json")
-    user_data = json.load(data_obj)
-    # ID_interests = {
-    #     "userID": None,
-    #     # "userInterests": None
-    # }
-
-    for i in user_data:
-    #     ID_interests[i]["userID"] = user_data[i]["userID"]
-
-        print(i)
+    pass
 
 '''==========================================================================================================================='''
 
-if __name__ == "__main__":
-    my_array = [12,5,99,-9,3.14]
+def main():
+    # my_array = [12,5,99,-9,3.14]
+
+    x_coord = [1,3]
+    y_coord = [3,1]
 
     # populate_lists()
     # bar_data()
@@ -281,6 +281,10 @@ if __name__ == "__main__":
     # scatter_practice()
     # scatter_data_simple()
     # bubble_sort(my_array)
-    find_similarities()
+    euclid_dist(x_coord, y_coord)
+    # find_similarities()
 
-    pass
+        
+
+if __name__ == "__main__":
+    main()
