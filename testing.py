@@ -25,11 +25,21 @@ def populate_lists():
             interests_list.append(i["userInterests"])
             userid_list.append(i["userID"])
 
-    print(interests_list)
+    # print(interests_list)
 
-    # for i in interests_list:
-    #     # print(i)
-    #     print(i.values())
+    for i in interests_list:
+        keys = i.keys()
+        values = i.values()
+        # print(keys,values)
+        # for key in keys:
+        #     print(key)
+
+    for key in keys:
+        print(key)
+    for val in values:
+        print(val)
+
+        # print(i.values())
 
 '''==========================================================================================================================='''
 
@@ -269,11 +279,61 @@ def find_similarities():
 
 '''==========================================================================================================================='''
 
+'''
+Calculating Pearsons correlation coefficient
+'''
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# Officially known as Person correlation coeffiecient (PCC), is a measure of linear 
+# correlation between two vars. Or two persons data points. Defined as the covariance 
+# of 2 variables divided my the product of their respective standard deviation. Is very 
+# well suited to quantifying linear correlations, and remain largely unaffected by 
+# different scales of measurement
+# 
+# where r = the coefficient, cov = covariance, sd = standard deviation
+# r(x,y) = cov(x,y)/(sd(x)*sd(y))
+# 
+# 1) Calculate the averages of x and y (assuming there are multiple values, or data 
+# collection, of x and y)
+# 2) Calculate the difference between each data point value and its respective average
+# 3) Square the differences
+# 4) Calculate the sum of of squared differences
+# 5) Calculate the sum of the product (do this first) of differences
+# 6) Squareroot the sums (for x and y)
+# 7) Find r
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# Import sqrt from math
+from users_copy import dataset
+
+
+def pear_coef():
+    IDs = []
+    interests = []
+
+    count = 0
+
+    for i in dataset:
+        IDs.append(i["userID"])
+        interests.append(i["userInterests"])
+        count += 1
+        # print()
+
+    # print(IDs, interests, count)
+    for j in interests:
+        print(j["q1"])
+
+'''==========================================================================================================================='''
+
+
 def main():
     # my_array = [12,5,99,-9,3.14]
 
-    x_coord = [1,3]
-    y_coord = [3,1]
+    x_coord = [1,2,3,4,5]
+    y_coord = [2,4,6,8,10]
+
+    x = [1,2]
+    y = [5,10]
 
     # populate_lists()
     # bar_data()
@@ -281,9 +341,9 @@ def main():
     # scatter_practice()
     # scatter_data_simple()
     # bubble_sort(my_array)
-    euclid_dist(x_coord, y_coord)
+    # euclid_dist(x, y)
     # find_similarities()
-
+    pear_coef()
         
 
 if __name__ == "__main__":
