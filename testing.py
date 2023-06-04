@@ -304,24 +304,44 @@ Calculating Pearsons correlation coefficient
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Import sqrt from math
-from users_copy import dataset
+# from users_copy import dataset
+from sampledata import dataset
+
+def process_users(user1, user2):
+    same_interest = {}
+    for i in dataset[user1]:
+        if i in dataset[user2]:
+            same_interest[i] = 1
+
+    # print(same_interest)
+
+    # for i in dataset[user1]:
+    #     print(i)
+        # if i in i["userInterests"]:
+        #     same_interest[i] = 1
+
+    num_of_interests = len(same_interest)
+    print(same_interest)
+    print(num_of_interests)
+    print(dataset[user1])
+    print(dataset[user2])
 
 
-def pear_coef():
-    IDs = []
-    interests = []
 
-    count = 0
-
-    for i in dataset:
-        IDs.append(i["userID"])
-        interests.append(i["userInterests"])
-        count += 1
-        # print()
+def pear_coef(user1, user2):
 
     # print(IDs, interests, count)
-    for j in interests:
-        print(j["q1"])
+    # q1_vals = []
+    # for j in interests:
+        
+    #     q1_vals.append(j["q1"])
+
+    
+    # print(q1_vals)
+    # print(sum(q1_vals)/len(q1_vals))
+
+    pass
+
 
 '''==========================================================================================================================='''
 
@@ -335,6 +355,9 @@ def main():
     x = [1,2]
     y = [5,10]
 
+    user1 = "Lisa Rose"
+    user2 = "Michael Phillips"
+
     # populate_lists()
     # bar_data()
     # scatter_data()
@@ -343,7 +366,8 @@ def main():
     # bubble_sort(my_array)
     # euclid_dist(x, y)
     # find_similarities()
-    pear_coef()
+    process_users(user1, user2)
+    # pear_coef()
         
 
 if __name__ == "__main__":
