@@ -74,9 +74,11 @@ class Data:
 
 def main():
     # figure out which parameters to pass in to which objects
-    user = User()
-    math = Math()
-    data = Data()
+    # this order will probably be best
+    data = Data()   # Extract all necessary user data, to pass to User()
+    user = User()   # reorganize data and choose users, to pass to Math()
+    math = Math()   # Calculate the distance (d) and pearson coefficient (r) for the users chosen
+    
 
 if __name__ == "__main__":
     main()
