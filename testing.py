@@ -285,7 +285,7 @@ Calculating Pearsons correlation coefficient
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # Officially known as Person correlation coeffiecient (PCC), is a measure of linear 
-# correlation between two vars. Or two persons data points. Defined as the covariance 
+# correlation between two vars. Or two persons data points. Defined as the covariance -
 # of 2 variables divided my the product of their respective standard deviation. Is very 
 # well suited to quantifying linear correlations, and remain largely unaffected by 
 # different scales of measurement
