@@ -13,6 +13,7 @@
 from users_copy import dataset
 import numpy as np
 import json
+import math
 
 class User:
     def __init__(self, ID, ANSWERS):
@@ -20,6 +21,7 @@ class User:
         self.ANSWERS = ANSWERS
 
     def assign_data(data):
+        # figure out how to assign different user ids and answers to individual users
         pass
 
 class Math:
@@ -71,7 +73,10 @@ class Data:
         return self.interests_list, self.userid_list
 
 def main():
-    pass
+    # figure out which parameters to pass in to which objects
+    user = User()
+    math = Math()
+    data = Data()
 
 if __name__ == "__main__":
     main()
