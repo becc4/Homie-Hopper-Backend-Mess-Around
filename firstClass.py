@@ -16,20 +16,20 @@ import json
 import math
 
 class User:
-    def __init__(self, ID, ANSWERS):
-        self.ID = ID
-        self.ANSWERS = ANSWERS
+    def __init__(self):
+        self.ID = ""
+        self.ANSWERS = {}
 
     def assign_data(data):
         # figure out how to assign different user ids and answers to individual users
         pass
 
 class Math:
-    def __init__(self, user1_data, user2_data, d, r):
-        self.user1_data = user1_data
-        self.user2_data = user2_data
-        self.d = d
-        self.r = r
+    def __init__(self):
+        self.user1_data = {}
+        self.user2_data = {}
+        self.d = 0
+        self.r = 0
 
     def euclid_distance(self):
         self.d = math.sqrt(sum(pow(a - b, 2) for a, b in zip(self.user1_data, self.user2_data)))
@@ -57,7 +57,7 @@ class Math:
         return self.r
 
 class Data:
-    def __init__(self, data_dict, interests_list, userid_list):
+    def __init__(self):
         self.data_dict = {}
         self.interests_list = []
         self.userid_list = []
@@ -75,10 +75,13 @@ class Data:
 def main():
     # figure out which parameters to pass in to which objects
     # this order will probably be best
-    data = Data()   # Extract all necessary user data, to pass to User()
-    user = User()   # reorganize data and choose users, to pass to Math()
-    math = Math()   # Calculate the distance (d) and pearson coefficient (r) for the users chosen
-    
+    D = Data()   # Extract all necessary user data, to pass to User()
+    U = User()   # reorganize data and choose users, to pass to Math()
+    M = Math()   # Calculate the distance (d) and pearson coefficient (r) for the users chosen
+
+    extracted_data = D.process_data()
+    print(extracted_data)
+
 
 if __name__ == "__main__":
     main()
