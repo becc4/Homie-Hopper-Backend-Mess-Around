@@ -17,20 +17,7 @@ import math
 
 class User:
     def __init__(self):
-        self.ID_intr = {
-            "": {
-                "": 0,
-                "": 0,
-                "": 0,
-                "": 0,
-                "": 0,
-                "": 0,
-                "": 0,
-                "": 0,
-                "": 0,
-                "": 0,
-            }
-        }
+        self.ID_intr = {}
 
     def assign_data(data):
         # figure out how to assign different user ids and answers to individual users
