@@ -346,6 +346,7 @@ def pear_coef(user1, user2):
 '''==========================================================================================================================='''
 
 
+
 def main():
     # my_array = [12,5,99,-9,3.14]
 
@@ -366,7 +367,7 @@ def main():
     # bubble_sort(my_array)
     # euclid_dist(x, y)
     # find_similarities()
-    process_users(user1, user2)
+    # process_users(user1, user2)
     # pear_coef()
         
 

@@ -21,7 +21,7 @@ class User:
 
     def assign_data(data):
         # figure out how to assign different user ids and answers to individual users
-        pass
+        pass            
 
 class Math:
     def __init__(self):
@@ -57,19 +57,39 @@ class Math:
 
 class Data:
     def __init__(self):
+        # self.interests = None
+        # self.userids = None
+        self.new_dict = {}
         self.data_dict = {}
-        self.interests_list = []
-        self.userid_list = []
 
     def process_data(self):
-        with open(r"users.json") as file:    
-            self.data_dict = json.load(file)
+        with open(r"users.json") as file:
+            # self.interests = [profile["userInterests"] for profile in file]
+            # self.userids = [profile["userID"]() for profile in file]
 
-            for i in self.data_dict:
-                self.interests_list.append(i["userInterests"])
-                self.userid_list.append(i["userID"])
+            # self.data_dict = {
+            #     profile["userID"]: profile["userInterests"] for profile in file
+            # }
 
-        return self.interests_list, self.userid_list
+            profile_json = json.load(file)
+            # print(profile_json[0])
+
+            for profile in profile_json:
+                self.data_dict = {
+                    profile["userID"]: profile["userInterests"]
+                }
+
+        print(self.data_dict)
+
+        # self.new_dict = {
+        #     "userInterests": self.interests,
+        #     "userIDs": self.userids
+        # }
+
+        # with open(r"onlyUsers.json", r"w") as file:
+        #     # json.dump(self.data_dict, file, indent=4)
+        #     json.dump(self.data_dict, file, indent=4)
+        
 
 def main():
     # figure out which parameters to pass in to which objects
@@ -78,8 +98,9 @@ def main():
     U = User()   # reorganize data and choose users, to pass to Math()
     M = Math()   # Calculate the distance (d) and pearson coefficient (r) for the users chosen
 
-    extracted_data = D.process_data()
-    print(extracted_data)
+    D.process_data()
+    # extracted_data = D.process_data()
+    # print(extracted_data)
 
 
 if __name__ == "__main__":
