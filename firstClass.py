@@ -57,38 +57,28 @@ class Math:
 
 class Data:
     def __init__(self):
-        # self.interests = None
-        # self.userids = None
-        self.new_dict = {}
+        self.interests = None
+        self.ids = None
         self.data_dict = {}
 
     def process_data(self):
         with open(r"users.json") as file:
-            # self.interests = [profile["userInterests"] for profile in file]
-            # self.userids = [profile["userID"]() for profile in file]
-
-            # self.data_dict = {
-            #     profile["userID"]: profile["userInterests"] for profile in file
-            # }
 
             profile_json = json.load(file)
             # print(profile_json[0])
 
             for profile in profile_json:
-                self.data_dict = {
-                    profile["userID"]: profile["userInterests"]
-                }
+                # print(profile["userID"])
+                # print(profile["userInterests"])
 
-        print(self.data_dict)
+                # Assign the original userID and userInterests data to temporary variables
+                self.ids = profile["userID"]
+                self.interests = profile["userInterests"]
 
-        # self.new_dict = {
-        #     "userInterests": self.interests,
-        #     "userIDs": self.userids
-        # }
+                # Assign the userInterests with the userID to the empty dictionary
+                self.data_dict[self.ids] = self.interests
 
-        # with open(r"onlyUsers.json", r"w") as file:
-        #     # json.dump(self.data_dict, file, indent=4)
-        #     json.dump(self.data_dict, file, indent=4)
+            return self.data_dict
         
 
 def main():
@@ -99,8 +89,10 @@ def main():
     M = Math()   # Calculate the distance (d) and pearson coefficient (r) for the users chosen
 
     D.process_data()
-    # extracted_data = D.process_data()
-    # print(extracted_data)
+    extracted_data = D.process_data()
+    print(extracted_data)
+    print(type(extracted_data))
+
 
 
 if __name__ == "__main__":
