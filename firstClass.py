@@ -14,17 +14,37 @@ import numpy as np
 import json
 import math
 
-class User:
+class User():
     '''
-    A class to organize and choose which user's data will be returned. There will be one member attribute: ID_intr. There will be one member method assign_data() to reorganize and elect which user's data will be returned.
-    ID_intr, stands for ID and Interests, will save the extracted data to its own variable. It will then be passed in as a parameter to choose which specific users to eventually return and use in the custom Math class.
+    A class to organize and choose which user's data will be returned. 
+    There will be one member attribute: ID_intr. There will be one member 
+    method assign_data() to reorganize and elect which user's data will be returned.
+
+    ID_intr, stands for ID and Interests, will save the extracted data 
+    to its own variable. It will then be passed in as a parameter to 
+    choose which specific users to eventually return and use in the custom 
+    Math class.
     '''
+    name = str()
+    interests = dict()
+    userID = str()
+
     def __init__(self):
         self.ID_intr = {}
+    
+    def __repr__(self):
+        return self.name
 
-    def assign_data(data):
+    def assign_data(self, data):
         # figure out how to assign different user ids and answers to individual users
-        pass            
+        """ 
+        Ideally, we would just grab the user info from the site
+        We cannot grab data from the Data class (rn) because it is a dictionary
+            This will work if we can at least grab the user's name from the site
+        """
+        self.userID = data["userID"]
+        self.name = data["userName"]
+        self.interests = data["userInterests"]
 
 class Math:
     '''
@@ -39,8 +59,9 @@ class Math:
         self.d = 0.0
         self.r = 0.0
 
-    def euclid_distance(self):
-        self.d = math.sqrt(sum(pow(a - b, 2) for a, b in zip(self.user1_data, self.user2_data)))
+    def euclid_distance(self, user):
+        # self.d = math.sqrt(sum(pow(a - b, 2) for a, b in zip(self.user1_data, self.user2_data)))
+        #self.d = 
         print(self.d)
         return self.d
 
@@ -66,12 +87,17 @@ class Math:
 
 class Data:
     '''
-    A class to extract all necessary user data from a JSON file. There will be 3 member attributes: interests, ids, data_dict. There will be 1 member method: process_data().
-    interests and ids will be used as variables to be assigned the original userInterests and userID data from the JSON. Where data_dict will be intialized as a blank dictionary and be used to save the necessary data with the userIDs as the keys, and userInterests as an embedded dictionary of keys and values.
+    A class to extract all necessary user data from a JSON file. There
+    will be 3 member attributes: interests, id, data_dict. There will be 1 
+    member method: process_data().
+
+    interests and id will be used as variables to be assigned the original 
+    userInterests and userID data from the JSON. Where data_dict will be 
+    intialized as a blank dictionary and be used to save the necessary 
+    data with the userID as the keys, and userInterests as an embedded 
+    dictionary of keys and values.
     '''
     def __init__(self):
-        self.interests = None
-        self.ids = None
         self.data_dict = {}
 
     def process_data(self):
@@ -82,27 +108,33 @@ class Data:
             # Loop through 
             for profile in profile_json:
                 # Assign the original userID and userInterests data to temporary variables
-                self.ids = profile["userID"]
-                self.interests = profile["userInterests"]
+                U = User()
+                U.assign_data(profile)
+                # self.id = profile["userID"]
+                # self.interests = profile["userInterests"]
 
                 # Assign the userInterests with the userID to the empty dictionary
-                self.data_dict[self.ids] = self.interests
+                self.data_dict[U.userID] = U
 
             return self.data_dict
         
 
 def main():
     D = Data()   # Extract all necessary user data, to pass to User()
-    U = User()   # reorganize data and choose users, to pass to Math()
-    M = Math()   # Calculate the distance (d) and pearson coefficient (r) for the users chosen
+    # U = User()   # reorganize data and choose users, to pass to Math()
+    # M = Math()   # Calculate the distance (d) and pearson coefficient (r) for the users chosen
 
     # P.S. This program can be run as is if you would like to see the extracted data for yourself ^_^
-    D.process_data()
+    # D.process_data()
     extracted_data = D.process_data()
     print(extracted_data)
+
+    print(extracted_data["0zJNMsXJusc0eSjAsLpJiK2qKFA3"])
+
     print(type(extracted_data))
 
-
+    # for i in extracted_data:
+    #     M.euclid_distance()
 
 if __name__ == "__main__":
     main()
